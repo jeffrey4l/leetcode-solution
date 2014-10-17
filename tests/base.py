@@ -14,4 +14,6 @@ class TestCase(unittest.TestCase):
         solution = self.SolutionClass()
         for param, expected in self.data:
             method = getattr(solution, self.test_method)
-            self.assertEqual(expected, method(*param))
+            ret = method(*param)
+            self.assertEqual(expected, ret,
+                             "expectd<%s> != actual<%s> for data %s" % (expected, ret, param))
