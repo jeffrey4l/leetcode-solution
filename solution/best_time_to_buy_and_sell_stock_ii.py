@@ -3,8 +3,6 @@
 
 # problem: https://oj.leetcode.com/problems/best-time-to-buy-and-sell-stock-ii/
 
-import unittest
-
 class Solution:
     def maxProfit(self, prices):
         profit = 0
@@ -27,21 +25,3 @@ class Solution:
                 profit += (d[-1] - d[0])
 
         return profit
-
-class SolutionTestCase(unittest.TestCase):
-
-    def test_pass(self):
-        data = (
-            ([], 0),
-            ([1, 2], 1),
-            ([1, 2, 4], 3),
-            ([1, 2, 4, 1], 3),
-        )
-
-        for prices, profit in data:
-            calculated = Solution().maxProfit(prices)
-            self.assertEqual(profit, calculated, "%s != %s for input: % s" % (profit, calculated, prices))
-        
-
-if __name__ == '__main__':
-    unittest.main()
