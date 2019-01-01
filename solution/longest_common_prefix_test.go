@@ -1,4 +1,4 @@
-package longest_common_prefix
+package solution
 
 import (
 	"testing"
@@ -30,7 +30,7 @@ func longestCommonPrefix(strs []string) string {
 
 }
 
-func TestSuccess(t *testing.T) {
+func TestSuccessA(t *testing.T) {
 	s := longestCommonPrefix([]string{"abc", "ab"})
 	assert.Equal(t, s, "ab", "")
 

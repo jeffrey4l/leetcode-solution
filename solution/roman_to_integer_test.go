@@ -1,4 +1,4 @@
-package roman_to_integer
+package solution
 
 // Probelem: https://leetcode.com/problems/roman-to-integer/
 
