@@ -8,8 +8,8 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func TestPalindromeNumberSuccess(t *testing.T) {
-	expected := map[int]bool{
+var expected = func() map[int]bool {
+	return map[int]bool{
 		20:            false,
 		11:            true,
 		1:             true,
@@ -19,18 +19,41 @@ func TestPalindromeNumberSuccess(t *testing.T) {
 		1001:          true,
 		math.MaxInt64: false,
 	}
-	timeit(func() {
+}()
+
+func TestPalindromeNumberSuccess(t *testing.T) {
+	for k, v := range expected {
+
+		a := isPalindrome(k)
+		assert.Equal(t, a, v, fmt.Sprintf("Expected %d is %v", k, v))
+	}
+	for k, v := range expected {
+
+		a := isPalindrome2(k)
+		assert.Equal(t, a, v, fmt.Sprintf("Expected %d is %v", k, v))
+	}
+}
+
+func BenchmarkPalindromeNumber(b *testing.B) {
+	for n := 0; n < b.N; n++ {
 		for k, v := range expected {
 
 			a := isPalindrome(k)
-			assert.Equal(t, a, v, fmt.Sprintf("Expected %d is %v", k, v))
+			if v != a {
+				b.Errorf("Expected %d is %v", k, v)
+			}
 		}
-	}, "string", 1000)
-	timeit(func() {
+	}
+}
+
+func BenchmarkPalindromeNumber2(b *testing.B) {
+	for n := 0; n < b.N; n++ {
 		for k, v := range expected {
 
 			a := isPalindrome2(k)
-			assert.Equal(t, a, v, fmt.Sprintf("Expected %d is %v", k, v))
+			if v != a {
+				b.Errorf("Expected %d is %v", k, v)
+			}
 		}
-	}, "better", 1000)
+	}
 }
